@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { fetchContactsFailure, fetchContactsStart, fetchContactsSuccess } from '../redux/slices/contactsSlice';
+import axios from 'axios';
 
 interface UseContactsProps {
     searchTerm?: string;
@@ -20,12 +21,8 @@ export default function useContacts(props: UseContactsProps) {
                 if (searchTerm) {
                     url = `/api/contacts/search?term=${searchTerm}`;
                 }
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
-                dispatch(fetchContactsSuccess(data));
+                const response = await axios.get(url);
+                dispatch(fetchContactsSuccess(response.data));
             } catch (err) {
                 if (err instanceof Error) {
                     dispatch(fetchContactsFailure(err.message));

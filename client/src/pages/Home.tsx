@@ -27,12 +27,14 @@ export default function Home() {
 
     const handleCallClick = async (id: number) => {
         const result = await handleCall(id);
-        alert(result);
+        alert(result.message);
     };
 
     const handleDeleteClick = async (id: number) => {
-        await handleDelete(id);
-        dispatch(setSearchTerm(""));
+        if (window.confirm("Are you sure you want to delete this contact?")) {
+            await handleDelete(id);
+            dispatch(setSearchTerm(""));
+        }
     };
 
     const handleSearch = (term: string) => {

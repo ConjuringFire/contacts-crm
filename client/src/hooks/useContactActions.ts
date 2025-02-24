@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Contact } from "../types/contact";
 
 interface HandleCallResponse {
@@ -7,33 +8,26 @@ interface HandleCallResponse {
 
 export default function useContactActions() {
     const handleSave = async (contact:Contact):Promise<void> => {
-        const {id} = contact;
-
-        const method = "POST";
-        const url = "/api/contacts";
-
-        await fetch(url, {
-            method,
+        await axios({ 
+            method: "POST",
+            url: "/api/contacts",
+            data: contact,
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(contact)
         });
     }
 
     const handleEdit = async (id: number): Promise<Contact> => {
-        const response = await fetch(`/api/contacts/${id}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
+        const response = await axios.get(`/api/contacts/${id}`);
+        return response.data;
     };
 
     const handleDelete = async (id: number):Promise<void> => {
-        await fetch(`/api/contacts/${id}`, { method: "DELETE" });
+        axios.delete(`/api/contacts/${id}`);
     };
 
     const handleCall = async (id: number): Promise<HandleCallResponse> => {
-        const response = await fetch(`/api/contacts/${id}/call`, { method: "POST" });
-        return response.json();
+        const response = await axios.post(`/api/contacts/${id}/call`, { method: "POST" });
+        return response.data;
     };
 
     return {handleSave, handleDelete, handleEdit, handleCall};
