@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import ContactList from './components/ContactsList';
+import useContacts from './hooks/useContacts';
+import useContactActions from './hooks/useContactActions';
+import { Layout, Typography } from 'antd';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const { Title } = Typography;
+
+export default function App() {
+    const [searchTerm, setSearchTerm] = useState<string>("");
+    
+    const { contacts, isLoading, error } = useContacts({searchTerm});
+    const { handleCall} = useContactActions();
+
+    const onCallClick = async (id: number) => {
+        const result = await handleCall(id);
+        alert(result.message);
+    }
+
+    return (
+        <Layout>
+            <Title>Contacts CRM</Title>
+            <ContactList contacts={contacts} onCall={onCallClick} />
+        </Layout>
+    )
 }
-
-export default App;
