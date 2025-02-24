@@ -127,10 +127,19 @@ Before you begin, ensure you have the following installed:
 -   `GET /api/contacts`: Get all contacts.
 -   `GET /api/contacts/{id}`: Get a specific contact.
 -   `POST /api/contacts`: Create a new contact.
--   `PUT /api/contacts/{id}`: Update an existing contact.
+-   `POST /api/contacts/{id}`: Update an existing contact.
 -   `DELETE /api/contacts/{id}`: Delete a contact.
 -   `GET /api/contacts/search?term={term}`: Search contacts.
 -   `POST /api/contacts/{id}/call`: Simulate calling a contact.
+
+## CLI Commands
+
+-   `php artisan contact:get {id}`: Get a specific contact.
+-   `php artisan contact:contact:create {name} {phone} {email}`: Create a new contact.
+-   `php artisan contact:update {id} {--name=} {--phone=} {--email=}`: Update an existing contact.
+-   `php artisan contact:delete {id}`: Delete a contact.
+-   `php artisan contact:search {term}`: Search contacts.
+-   `php artisan contact:call $id`: Simulate calling a contact.
 
 ## Contributing
 
