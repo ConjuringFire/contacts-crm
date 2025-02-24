@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { Layout, Space, Card, Alert } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { setSearchTerm } from '../redux/slices/searchTermSlice';
 import { setEditContact } from '../redux/slices/editContactSlice';
 import { useState } from 'react';
 

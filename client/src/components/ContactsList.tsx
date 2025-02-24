@@ -1,6 +1,6 @@
 import React from 'react';
 import { Contact } from '../types/contact';
-import { Space, Table, TableProps } from 'antd';
+import { Button, Space, Table, TableProps } from 'antd';
 import { DeleteFilled } from '@ant-design/icons';
 
 interface ContactListProps {
@@ -10,7 +10,7 @@ interface ContactListProps {
     onCall: (id: number) => void;
 }
 
-const ContactList: React.FC<ContactListProps> = (props: ContactListProps) => {
+export default function ContactList (props: ContactListProps) {
     const { contacts, onEdit, onDelete, onCall } = props;
     const columns: TableProps['columns'] = [
         {
@@ -33,9 +33,9 @@ const ContactList: React.FC<ContactListProps> = (props: ContactListProps) => {
             key: 'action',
             render: (_, record) => (
               <Space size="middle">
-                <a onClick={() => onCall(record.id)}>Call</a>
-                <a onClick={() => onEdit(record.id)}>Edit</a>
-                <a onClick={() => onDelete(record.id)}><DeleteFilled /></a>
+                <Button type="text" onClick={() => onCall(record.id)}>Call</Button>
+                <Button type="text" onClick={() => onEdit(record.id)}>Edit</Button>
+                <Button type="text" onClick={() => onDelete(record.id)}><DeleteFilled /></Button>
               </Space>
             ),
           },
@@ -43,8 +43,6 @@ const ContactList: React.FC<ContactListProps> = (props: ContactListProps) => {
       ];
     
     return (
-        <Table dataSource={contacts} columns={columns} />
+        <Table rowKey="id" dataSource={contacts} columns={columns} />
     );
 };
-
-export default ContactList;
