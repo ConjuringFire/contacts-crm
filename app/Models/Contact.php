@@ -16,7 +16,7 @@ class Contact extends Model
     {
         return [
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|regex:/^\+[1-9]\d{7,14}$/',
+            'phone' => ['required', 'string', 'regex:/^\+(61|64)\d{8,12}$/'],
             'email' => 'required|email',
         ];
     }

@@ -26,6 +26,32 @@ class ContactControllerTest extends TestCase
         $this->assertDatabaseHas('contacts', $data);
     }
 
+    public function test_upsert_contact_update_success(): void
+    {
+        // Create an existing contact
+        $existingContact = Contact::factory()->create([
+            'name' => 'Original Name',
+            'phone' => '+61551234567',
+            'email' => 'original@example.com',
+        ]);
+
+        // Data for the update
+        $updateData = [
+            'id' => $existingContact->id,
+            'name' => 'Updated Name',
+            'phone' => '+61559876543',
+            'email' => 'updated@example.com',
+        ];
+
+        // Call the upsert method with the existing contact's ID
+        $response = $this->postJson('/api/contacts', $updateData);
+
+        $response->assertStatus(200)
+        ->assertJson($updateData);
+
+        $this->assertDatabaseHas('contacts', $updateData);
+    }
+
     public function test_get_contact(): void
     {
         $contact = Contact::factory()->create();

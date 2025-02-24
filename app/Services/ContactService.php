@@ -21,15 +21,6 @@ class ContactService
         return Validator::make($data, $rules);
     }
 
-    public static function rules(): array
-    {
-        return [
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|regex:/^\+[1-9]\d{7,14}$/',
-            'email' => 'required|email',
-        ];
-    }
-
     public function getContact(int $id): ?Contact
     {
         return Contact::find($id);
