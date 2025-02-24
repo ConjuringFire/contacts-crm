@@ -47,7 +47,7 @@ class ContactControllerTest extends TestCase
     }
 
     // TODO: fix search contacts method
-    /*public function test_search_contacts(): void
+    public function test_search_contacts(): void
     {
         Contact::factory()->create(['name' => 'John Doe']);
         Contact::factory()->create(['name' => 'Jane Smith']);
@@ -57,7 +57,7 @@ class ContactControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonCount(1)
             ->assertJsonPath('0.name', 'John Doe');
-    }*/
+    }
 
     public function test_get_all_contacts(): void
     {

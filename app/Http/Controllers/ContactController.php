@@ -48,13 +48,13 @@ class ContactController extends Controller
     }
 
     // todo: fix search contacts method
-    /*public function search(Request $request): JsonResponse
+    public function search(Request $request): JsonResponse
     {
         $term = $request->input('term');
         $results = $this->contactService->searchContacts($term);
 
         return response()->json($results);
-    }*/
+    }
 
     public function index(): JsonResponse
     {

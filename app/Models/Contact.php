@@ -20,4 +20,10 @@ class Contact extends Model
             'email' => 'required|email',
         ];
     }
+
+    public static function search(string $term) {
+        return self::where('name', 'LIKE', "%{$term}%")
+            ->orWhere('email', 'LIKE', "%{$term}%")
+            ->orWhere('phone', 'LIKE', "%{$term}%");
+    }
 }
