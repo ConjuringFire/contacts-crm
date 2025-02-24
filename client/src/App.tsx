@@ -1,26 +1,21 @@
-import { useState } from 'react';
-import ContactList from './components/ContactsList';
-import useContacts from './hooks/useContacts';
-import useContactActions from './hooks/useContactActions';
-import { Layout, Typography } from 'antd';
+import { Layout } from 'antd';
+import { BrowserRouter, Link } from 'react-router-dom';
+import AppRoutes from './routes';
+import { useSelector } from 'react-redux';
+import { RootState } from './redux/store';
 
-const { Title } = Typography;
+const { Content } = Layout;
 
 export default function App() {
-    const [searchTerm, setSearchTerm] = useState<string>("");
-    
-    const { contacts, isLoading, error } = useContacts({searchTerm});
-    const { handleCall} = useContactActions();
-
-    const onCallClick = async (id: number) => {
-        const result = await handleCall(id);
-        alert(result.message);
-    }
+    const searchTerm = useSelector((state: RootState) => state.searchTerm);
 
     return (
-        <Layout>
-            <Title>Contacts CRM</Title>
-            <ContactList contacts={contacts} onCall={onCallClick} />
-        </Layout>
+        <BrowserRouter>
+            <Layout style={{ minHeight: '100vh' }}>
+                <Content style={{ padding: '24px 50px' }}>
+                    <AppRoutes />
+                </Content>
+            </Layout>
+        </BrowserRouter>
     )
 }

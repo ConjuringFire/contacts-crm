@@ -1,11 +1,12 @@
 import React from 'react';
 import { Contact } from '../types/contact';
 import { Space, Table, TableProps } from 'antd';
+import { DeleteFilled } from '@ant-design/icons';
 
 interface ContactListProps {
     contacts: Contact[];
-    onEdit?: (id: number) => void;
-    onDelete?: (id: number) => void;
+    onEdit: (id: number) => void;
+    onDelete: (id: number) => void;
     onCall: (id: number) => void;
 }
 
@@ -33,8 +34,8 @@ const ContactList: React.FC<ContactListProps> = (props: ContactListProps) => {
             render: (_, record) => (
               <Space size="middle">
                 <a onClick={() => onCall(record.id)}>Call</a>
-                <a>Edit</a>
-                <a>Delete</a>
+                <a onClick={() => onEdit(record.id)}>Edit</a>
+                <a onClick={() => onDelete(record.id)}><DeleteFilled /></a>
               </Space>
             ),
           },

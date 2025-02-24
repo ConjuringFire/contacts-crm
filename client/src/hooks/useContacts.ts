@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Contact } from '../types/contact';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { fetchContactsFailure, fetchContactsStart, fetchContactsSuccess } from '../redux/slices/contactsSlice';
 
 interface UseContactsProps {
     searchTerm?: string;
@@ -7,39 +9,33 @@ interface UseContactsProps {
 
 export default function useContacts(props: UseContactsProps) {
     const {searchTerm} = props;
-
-    const [contacts, setContacts] = useState<Contact[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null)
+    const dispatch = useDispatch();
+    const { contacts, isLoading, error } = useSelector((state: RootState) => state.contacts);
 
     useEffect(() => {
         const fetchContacts = async () => {
-            setIsLoading(true);
-            setError(null);
-
+            dispatch(fetchContactsStart());
             try {
-                const url = searchTerm ? `/api/contacts/search?term=${searchTerm}` : `/api/contacts`;
+                let url = '/api/contacts';
+                if (searchTerm) {
+                    url = `/api/contacts/search?term=${searchTerm}`;
+                }
                 const response = await fetch(url);
-
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-
                 const data = await response.json();
-                setContacts(data);
-            } catch(e) {
-                if (e instanceof Error) {
-                    setError(e.message);
+                dispatch(fetchContactsSuccess(data));
+            } catch (err) {
+                if (err instanceof Error) {
+                    dispatch(fetchContactsFailure(err.message));
                 } else {
-                    setError("An unknown error occurred.");
+                    dispatch(fetchContactsFailure("An unknown error occurred."));
                 }
-            } finally {
-                setIsLoading(false);
             }
         };
-
         fetchContacts();
-    }, [searchTerm]);
+    }, [searchTerm, dispatch]);
 
-    return {contacts, isLoading, error};
+    return { contacts, isLoading, error };
 };

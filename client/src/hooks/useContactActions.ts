@@ -9,8 +9,8 @@ export default function useContactActions() {
     const handleSave = async (contact:Contact):Promise<void> => {
         const {id} = contact;
 
-        const method = id ? "PUT" : "POST";
-        const url = id ? `/api/contacts/${contact.id}` : '/api/contacts';
+        const method = "POST";
+        const url = "/api/contacts";
 
         await fetch(url, {
             method,
@@ -18,6 +18,14 @@ export default function useContactActions() {
             body: JSON.stringify(contact)
         });
     }
+
+    const handleEdit = async (id: number): Promise<Contact> => {
+        const response = await fetch(`/api/contacts/${id}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    };
 
     const handleDelete = async (id: number):Promise<void> => {
         await fetch(`/api/contacts/${id}`, { method: "DELETE" });
@@ -28,5 +36,5 @@ export default function useContactActions() {
         return response.json();
     };
 
-    return {handleSave, handleDelete, handleCall};
+    return {handleSave, handleDelete, handleEdit, handleCall};
 }
