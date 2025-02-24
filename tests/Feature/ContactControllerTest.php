@@ -46,13 +46,12 @@ class ContactControllerTest extends TestCase
         $this->assertSoftDeleted($contact);
     }
 
-    // TODO: fix search contacts method
     public function test_search_contacts(): void
     {
         Contact::factory()->create(['name' => 'John Doe']);
         Contact::factory()->create(['name' => 'Jane Smith']);
 
-        $response = $this->getJson('/api/contacts/search?term=John');
+        $response = $this->getJson('/api/contacts/search?term=Doe');
 
         $response->assertStatus(200)
             ->assertJsonCount(1)

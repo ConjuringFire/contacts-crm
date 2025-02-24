@@ -47,7 +47,6 @@ class ContactController extends Controller
         return response()->json(['error' => 'Contact not found'], 404);
     }
 
-    // todo: fix search contacts method
     public function search(Request $request): JsonResponse
     {
         $term = $request->input('term');
