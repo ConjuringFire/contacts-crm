@@ -1,66 +1,142 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Contact Management Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a React-based contact management application with a Laravel API backend. It allows users to create, read, update, and delete contacts.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   **Create Contacts:** Add new contacts with name, phone number (area code and phone), and email.
+-   **Read Contacts:** View a list of all contacts with search functionality.
+-   **Update Contacts:** Edit existing contact information.
+-   **Delete Contacts:** Remove contacts with confirmation prompts.
+-   **Call Contacts:** Initiate a call action (simulated).
+-   **Search:** Search contacts by name, phone, or email.
+-   **Responsive Design:** The application is designed to be responsive and work on various screen sizes.
+-   **Redux State Management:** Uses Redux for centralized state management.
+-   **Ant Design UI:** Utilizes Ant Design for a clean and consistent user interface.
+-   **Axios for API Calls:** Uses Axios for efficient and reliable API requests.
+-   **React Router:** Uses React Router for navigation.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Technologies Used
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   **Frontend:**
+    -   React
+    -   TypeScript
+    -   Redux Toolkit
+    -   React Redux
+    -   React Router DOM
+    -   Ant Design
+    -   Axios
+    -   Jest and React Testing Library (for testing)
+-   **Backend:**
+    -   Laravel
+    -   PHP
 
-## Learning Laravel
+## Prerequisites
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Before you begin, ensure you have the following installed:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   Node.js and npm (or yarn)
+-   PHP and Composer
+-   MySQL or another database (configured in Laravel)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Setup
 
-## Laravel Sponsors
+### Backend (Laravel API)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1.  **Clone the repository:**
 
-### Premium Partners
+    ```bash
+    git clone <your-backend-repository-url>
+    cd <your-backend-directory>
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+2.  **Install Composer dependencies:**
+
+    ```bash
+    composer install
+    ```
+
+3.  **Copy `.env.example` to `.env` and configure database settings:**
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    Modify the `.env` file with your database credentials.
+
+4.  **Generate application key:**
+
+    ```bash
+    php artisan key:generate
+    ```
+
+5.  **Run database migrations:**
+
+    ```bash
+    php artisan migrate
+    ```
+
+6.  **Start the Laravel development server:**
+
+    ```bash
+    php artisan serve
+    ```
+
+### Frontend (React Application)
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone <your-frontend-repository-url>
+    cd <your-frontend-directory>
+    ```
+
+2.  **Install npm dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Start the React development server:**
+
+    ```bash
+    npm start
+    ```
+
+    The application will be available at `http://localhost:3000`.
+
+## Testing
+
+### Frontend (React)
+
+1.  **Run Jest tests:**
+
+    ```bash
+    npm test
+    ```
+
+### Backend (Laravel)
+
+1.  **Run PHPUnit tests:**
+
+    ```bash
+    php artisan test
+    ```
+
+## API Endpoints
+
+-   `GET /api/contacts`: Get all contacts.
+-   `GET /api/contacts/{id}`: Get a specific contact.
+-   `POST /api/contacts`: Create a new contact.
+-   `PUT /api/contacts/{id}`: Update an existing contact.
+-   `DELETE /api/contacts/{id}`: Delete a contact.
+-   `GET /api/contacts/search?term={term}`: Search contacts.
+-   `POST /api/contacts/{id}/call`: Simulate calling a contact.
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Feel free to contribute to this project. Fork the repository, create a new branch, and submit a pull request.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[MIT](LICENSE)
