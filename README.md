@@ -84,11 +84,10 @@ Before you begin, ensure you have the following installed:
 
 ### Frontend (React Application)
 
-1.  **Clone the repository:**
+1.  **Open the client directory:**
 
     ```bash
-    git clone <your-frontend-repository-url>
-    cd <your-frontend-directory>
+    cd Client
     ```
 
 2.  **Install npm dependencies:**
